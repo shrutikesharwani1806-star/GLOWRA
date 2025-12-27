@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Safira';
+            src: url('./fonts/Safira-Regular.woff2') format('woff2'),
+                url('./fonts/Safira-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .menu-item {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease;
+        }
+
+        .menu-item.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-item a {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            color: #b87b7b;
+            transform: translateX(5px);
+        }
+
+
+        /* PAGE FADE IN */
+        .page-enter {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
+        .page-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.9s ease;
+        }
+
+        /* CARD SLIDE */
+        .card-enter {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .card-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+
+        /* STAGGER ANIMATION */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FLOAT ANIMATION */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body id="page" class="page-enter w-full bg-[#f3dede] overflow-x-hidden">
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="w-7xl mx-auto px-[3vw]">
+
+            <div class="flex items-center justify-between h-[9vh]">
+
+                <!-- LEFT MENU (DESKTOP) -->
+                <ul class="hidden lg:flex gap-[2vw] text-gray-700 font-medium">
+                    <li><a href="./index.html" class="hover:text-pink-500 transition">Home</a></li>
+                    <li><a href="./shop.html" class="hover:text-pink-500 transition">Shop</a></li>
+                    <li><a href="./about.html" class="hover:text-pink-500 transition">About</a></li>
+                    <li><a href="./contact.html" class="hover:text-pink-500 transition">Contact</a></li>
+                </ul>
+
+                <!-- LOGO -->
+                <h1 class="text-[6vw] sm:text-[4vw] lg:text-[2vw] hover:cursor-pointer font-semibold tracking-wide"
+                    style="font-family: 'Playfair Display', serif;">
+                    GLOWRA
+                </h1>
+
+                <!-- RIGHT ICONS -->
+                <div class="flex items-center gap-[2vw]">
+
+                    <!-- SEARCH (HIDE ON SMALL) -->
+                    <div class="hidden md:block relative">
+                        <input type="text" placeholder="Search" class="pl-[1vw] pr-[3vw] py-[0.8vh]
+                   rounded-full bg-gray-100 text-sm
+                   focus:outline-none focus:ring-1 focus:ring-pink-400">
+                        <span class="absolute right-[1vw] top-1/2 -translate-y-1/2">🔍</span>
+                    </div>
+
+                    <!-- ACCOUNT -->
+                    <span onclick="window.location.href='login.html'"
+                        class="cursor-pointer text-[5vw] sm:text-xl">👤</span>
+
+                    <!-- CART -->
+                    <a href="cart.html" class="relative cursor-pointer text-[5vw] sm:text-xl">
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs
+                           w-5 h-5 flex items-center justify-center rounded-full">
+                            0
+                        </span>
+                        🛒
+                    </a>
+
+                    <!-- HAMBURGER (MOBILE) -->
+                    <button onclick="toggleMenu()" class="lg:hidden text-[6vw] sm:text-[4vw]
+                      transition-all duration-300
+                       hover:scale-110 active:scale-95">
+                        ☰
+                    </button>
+
+                    <!-- BACKDROP -->
+                    <div id="menuBackdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40
+                     opacity-0 pointer-events-none
+                       transition-opacity duration-500">
+                    </div>
+
+                    <!-- MOBILE MENU -->
+                    <div id="mobileMenu" class="fixed top-0 right-0 h-[100vh] w-[70vw] sm:w-[45vw]
+                       bg-white z-50 shadow-2xl rounded-l-[4vw]
+                         translate-x-full scale-95 opacity-0
+                       transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+
+                        <!-- CLOSE -->
+                        <div class="flex justify-end p-[4vw]">
+                            <button onclick="toggleMenu()" class="text-[6vw] sm:text-[4vw]
+                           hover:rotate-90 transition duration-300">
+                                ✕
+                            </button>
+                        </div>
+
+                        <!-- MENU -->
+                        <ul id="menuItems" class="flex flex-col gap-[4vh] text-center mt-[8vh]
+                            text-[5vw] sm:text-[3vw]
+                           font-medium text-[#6d3f3f]">
+
+                            <li class="menu-item"><a href="index.html">Home</a></li>
+                            <li class="menu-item"><a href="shop.html">Shop</a></li>
+                            <li class="menu-item"><a href="#about">About</a></li>
+                            <li class="menu-item"><a href="cart.html">Orders</a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="card-enter hidden lg:hidden bg-white border-t px-[6vw] py-[3vh] space-y-[2vh]">
+
+            <a href="#home" class="block">Home</a>
+            <a href="#shop" class="block">Shop</a>
+            <a href="#about" class="block">About</a>
+            <a href="#pages" class="block">Pages</a>
+            <a href="#contact" class="block">Contact</a>
+
+        </div>
+    </nav>
+    <!-- PAGE TITLE -->
+    <h1 class="fade-up text-[6vw] mt-[5vh] text-center sm:text-[4vw] lg:text-[2vw]
+               font-bold tracking-wide cursor-pointer" style="font-family:'Playfair Display', serif;">
+        YOUR ORDERS
+    </h1>
+
+    <!-- CART CONTAINER -->
+    <div id="card" class="card-enter max-w-5xl mx-auto bg-white mt-12 p-8 rounded-2xl">
+
+        <h2 class="text-3xl font-semibold mb-6 text-[#6d3f3f]">
+            My Cart (<span id="itemCount">0</span> items)
+        </h2>
+
+        <!-- CART ITEMS -->
+        <div id="cartItems" class="space-y-6"></div>
+
+        <!-- SUBTOTAL -->
+        <div class="float fade-up border-t mt-8 pt-6 flex justify-between text-xl font-medium">
+            <span>Subtotal</span>
+            <span>₹<span id="subtotal">0</span></span>
+        </div>
+
+        <!-- PAYMENT OPTIONS -->
+        <div class="mt-6">
+            <p class="font-medium mb-2">Payment Method</p>
+            <div class="flex gap-6 text-sm">
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="payment" checked> Cash on Delivery
+                </label>
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="payment"> UPI
+                </label>
+            </div>
+        </div>
+
+        <!-- PAY BUTTON -->
+        <button class="mt-8 w-full bg-[#b87b7b] text-white py-3 rounded-full
+                       hover:bg-[#a96a6a] transition-all duration-300">
+            Pay Now
+        </button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-purple-600 text-white text-center py-[3vh]">
+        © 2025 GLOWRA Beauty
+    </footer>
+    <!-- SCRIPT -->
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const cartItems = document.getElementById("cartItems");
+        const subtotalEl = document.getElementById("subtotal");
+        const itemCountEl = document.getElementById("itemCount");
+
+        function renderCart() {
+            cartItems.innerHTML = "";
+            let subtotal = 0;
+            let totalQty = 0;
+
+            // EMPTY CART STATE
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-gray-500 text-lg mb-6">
+                            No products added to cart
+                        </p>
+                        <a href="shop.html"
+                           class="inline-block px-8 py-3 bg-[#b87b7b] text-white rounded-full
+                                  hover:bg-[#a96a6a] transition-all duration-300">
+                            Shop Now
+                        </a>
+                    </div>
+                `;
+                subtotalEl.innerText = 0;
+                itemCountEl.innerText = 0;
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                totalQty += item.qty;
+
+                cartItems.innerHTML += `
+                <div class="relative flex gap-6 items-center border p-4 rounded-xl">
+
+                    <!-- REMOVE BUTTON -->
+                    <button onclick="removeItem(${index})"
+                        class="absolute top-3 right-3 text-red-500 text-lg
+                               hover:scale-110 transition">
+                        ✖
+                    </button>
+
+                    <!-- IMAGE -->
+                    <img src="${item.image}"
+                         class="w-24 h-24 object-contain bg-[#f6caca] rounded-lg">
+
+                    <!-- DETAILS -->
+                    <div class="flex-1">
+                        <h4 class="font-medium">${item.name}</h4>
+                        <p class="text-gray-500">₹${item.price}</p>
+                        <p class="text-sm mt-1">
+                            Quantity:
+                            <span class="font-semibold">${item.qty}</span>
+                        </p>
+                    </div>
+
+                    <!-- ITEM TOTAL -->
+                    <div class="font-medium text-[#6d3f3f]">
+                        ₹${item.price * item.qty}
+                    </div>
+                </div>
+                `;
+            });
+
+            subtotalEl.innerText = subtotal;
+            itemCountEl.innerText = totalQty;
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+        }
+
+        renderCart();
+    </script>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("page").classList.add("page-enter-active");
+            document.getElementById("card").classList.add("card-enter-active");
+
+            const items = document.querySelectorAll(".fade-up");
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add("show");
+                }, index * 120);
+            });
+        });
+
+    </script>
+    <script>
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const items = document.querySelectorAll(".menu-item");
+
+            if (!isMenuOpen) {
+                // OPEN
+                menu.classList.remove("translate-x-full", "scale-95", "opacity-0");
+                backdrop.classList.remove("opacity-0", "pointer-events-none");
+
+                // Stagger animation
+                items.forEach((item, i) => {
+                    setTimeout(() => item.classList.add("show"), i * 120);
+                });
+
+                isMenuOpen = true;
+            } else {
+                // CLOSE
+                menu.classList.add("translate-x-full", "scale-95", "opacity-0");
+                backdrop.classList.add("opacity-0", "pointer-events-none");
+
+                items.forEach(item => item.classList.remove("show"));
+
+                isMenuOpen = false;
+            }
+        }
+    </script>
+</body>
+
+
+
+</body>
+
+</html>

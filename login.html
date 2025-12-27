@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Safira';
+            src: url('./fonts/Safira-Regular.woff2') format('woff2'),
+                url('./fonts/Safira-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .menu-item {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease;
+        }
+
+        .menu-item.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-item a {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            color: #b87b7b;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+
+<body id="page" class="page-enter w-full bg-[#f3dede] h-screen overflow-x-hidden">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="w-7xl mx-auto px-[3vw]">
+
+            <div class="flex items-center justify-between h-[9vh]">
+
+                <!-- LEFT MENU (DESKTOP) -->
+                <ul class="hidden lg:flex gap-[2vw] text-gray-700 font-medium">
+                    <li><a href="./index.html" class="hover:text-pink-500 transition">Home</a></li>
+                    <li><a href="./shop.html" class="hover:text-pink-500 transition">Shop</a></li>
+                    <li><a href="./about.html" class="hover:text-pink-500 transition">About</a></li>
+                    <li><a href="./contact.html" class="hover:text-pink-500 transition">Contact</a></li>
+                </ul>
+
+                <!-- LOGO -->
+                <h1 class="text-[6vw] sm:text-[4vw] lg:text-[2vw] hover:cursor-pointer font-semibold tracking-wide"
+                    style="font-family: 'Playfair Display', serif;">
+                    GLOWRA
+                </h1>
+
+                <!-- RIGHT ICONS -->
+                <div class="flex items-center gap-[2vw]">
+
+                    <!-- SEARCH (HIDE ON SMALL) -->
+                    <div class="hidden md:block relative">
+                        <input type="text" placeholder="Search" class="pl-[1vw] pr-[3vw] py-[0.8vh]
+                   rounded-full bg-gray-100 text-sm
+                   focus:outline-none focus:ring-1 focus:ring-pink-400">
+                        <span class="absolute right-[1vw] top-1/2 -translate-y-1/2">🔍</span>
+                    </div>
+
+                    <!-- ACCOUNT -->
+                    <span onclick="window.location.href='login.html'"
+                        class="cursor-pointer text-[5vw] sm:text-xl">👤</span>
+
+                    <!-- CART -->
+                    <a href="cart.html" class="relative cursor-pointer text-[5vw] sm:text-xl">
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs
+                           w-5 h-5 flex items-center justify-center rounded-full">
+                            0
+                        </span>
+                        🛒
+                    </a>
+
+                    <!-- HAMBURGER (MOBILE) -->
+                    <button onclick="toggleMenu()" class="lg:hidden text-[6vw] sm:text-[4vw]
+                      transition-all duration-300
+                       hover:scale-110 active:scale-95">
+                        ☰
+                    </button>
+
+                    <!-- BACKDROP -->
+                    <div id="menuBackdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40
+                     opacity-0 pointer-events-none
+                       transition-opacity duration-500">
+                    </div>
+
+                    <!-- MOBILE MENU -->
+                    <div id="mobileMenu" class="fixed top-0 right-0 h-[100vh] w-[70vw] sm:w-[45vw]
+                       bg-white z-50 shadow-2xl rounded-l-[4vw]
+                         translate-x-full scale-95 opacity-0
+                       transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+
+                        <!-- CLOSE -->
+                        <div class="flex justify-end p-[4vw]">
+                            <button onclick="toggleMenu()" class="text-[6vw] sm:text-[4vw]
+                           hover:rotate-90 transition duration-300">
+                                ✕
+                            </button>
+                        </div>
+
+                        <!-- MENU -->
+                        <ul id="menuItems" class="flex flex-col gap-[4vh] text-center mt-[8vh]
+                            text-[5vw] sm:text-[3vw]
+                           font-medium text-[#6d3f3f]">
+
+                            <li class="menu-item"><a href="index.html">Home</a></li>
+                            <li class="menu-item"><a href="shop.html">Shop</a></li>
+                            <li class="menu-item"><a href="#about">About</a></li>
+                            <li class="menu-item"><a href="cart.html">Orders</a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-t px-[6vw] py-[3vh] space-y-[2vh]">
+
+            <a href="#home" class="block">Home</a>
+            <a href="#shop" class="block">Shop</a>
+            <a href="#about" class="block">About</a>
+            <a href="#pages" class="block">Pages</a>
+            <a href="#contact" class="block">Contact</a>
+
+        </div>
+    </nav>
+
+    <!-- MAIN WRAPPER -->
+    <div class="w-full h-[100vh] flex items-center justify-center">
+        <section id="loginWrapper" class="w-[90vw] h-[85vh] bg-gradient-to-br from-[#c77be5] to-[#8b4bd6]
+               rounded-[4vw] flex items-center justify-center opacity-0 scale-95">
+
+            <!-- CARD -->
+            <div class="w-[85vw] h-[78vh] bg-[#f8edf6] rounded-[3vw]
+                   flex flex-col lg:flex-row overflow-hidden shadow-xl">
+
+                <!-- LEFT IMAGE -->
+                <div class="hidden lg:flex w-[45%] items-center justify-center relative">
+
+                    <div class="absolute w-[18vw] h-[18vw] bg-[#e8c6ff] rounded-full left-[5vw] top-[15vh] opacity-70">
+                    </div>
+                    <div class="absolute w-[14vw] h-[14vw] bg-[#ffc1d9] rounded-full left-[12vw] top-[10vh] opacity-80">
+                    </div>
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" class="w-[20vw] animate-float" />
+                </div>
+
+                <!-- RIGHT FORM -->
+                <div class="flex-1 flex flex-col justify-center px-[6vw]">
+
+                    <h2 class="text-[#5c2b6c] font-semibold mb-[1vh]"
+                        style="font-family:'Playfair Display', serif; font-size:3vw;">
+                        Let’s sign you in.
+                    </h2>
+
+                    <p class="text-gray-600 mb-[4vh]" style="font-size:1.3vw;">
+                        Hello, welcome back to your account
+                    </p>
+
+                    <!-- EMAIL -->
+                    <input type="email" placeholder="Mail id" class="w-full py-[1.5vh] px-[1.5vw] rounded-xl
+                           bg-[#eadcf1] outline-none mb-[2vh]
+                           focus:ring-2 focus:ring-[#b87b7b]
+                           transition-all duration-300" style="font-size:1.2vw;" />
+
+                    <!-- PASSWORD -->
+                    <input type="password" placeholder="Password" class="w-full py-[1.5vh] px-[1.5vw] rounded-xl
+                           bg-[#eadcf1] outline-none mb-[1vh]
+                           focus:ring-2 focus:ring-[#b87b7b]
+                           transition-all duration-300" style="font-size:1.2vw;" />
+
+                    <p class="text-right text-[#6d3f3f] cursor-pointer mb-[3vh]" style="font-size:1vw;">
+                        Forget password?
+                    </p>
+
+                    <!-- SIGN IN -->
+                    <button class="w-full py-[1.6vh] rounded-full bg-[#5c2b6c] text-white
+                           hover:bg-[#4a2158] transition-all duration-500" style="font-size:1.2vw;">
+                        Sign in now
+                    </button>
+
+                    <!-- DIVIDER -->
+                    <div class="flex items-center my-[3vh]">
+                        <div class="flex-1 h-[1px] bg-gray-300"></div>
+                        <span class="px-[1vw] text-gray-500" style="font-size:1vw;">or sign in with</span>
+                        <div class="flex-1 h-[1px] bg-gray-300"></div>
+                    </div>
+
+                    <!-- GOOGLE -->
+                    <button class="w-full py-[1.4vh] rounded-xl bg-white border
+                           hover:shadow-lg transition-all duration-500 flex items-center justify-center gap-3"
+                        style="font-size:1.1vw;">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-[1.5vw]" />
+                        Google
+                    </button>
+
+                    <p class="text-center mt-[3vh] text-gray-600" style="font-size:1vw;">
+                        Don’t have an account?
+                        <span class="text-[#6d3f3f] cursor-pointer font-medium">Register</span>
+                    </p>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ANIMATIONS -->
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+    </style>
+
+    <!-- PAGE LOAD ANIMATION -->
+    <script>
+        window.addEventListener("load", () => {
+            const box = document.getElementById("loginWrapper");
+            box.classList.remove("opacity-0", "scale-95");
+            box.classList.add("opacity-100", "scale-100", "transition-all", "duration-700");
+        });
+    </script>
+    <script>
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const items = document.querySelectorAll(".menu-item");
+
+            if (!isMenuOpen) {
+                // OPEN
+                menu.classList.remove("translate-x-full", "scale-95", "opacity-0");
+                backdrop.classList.remove("opacity-0", "pointer-events-none");
+
+                // Stagger animation
+                items.forEach((item, i) => {
+                    setTimeout(() => item.classList.add("show"), i * 120);
+                });
+
+                isMenuOpen = true;
+            } else {
+                // CLOSE
+                menu.classList.add("translate-x-full", "scale-95", "opacity-0");
+                backdrop.classList.add("opacity-0", "pointer-events-none");
+
+                items.forEach(item => item.classList.remove("show"));
+
+                isMenuOpen = false;
+            }
+        }
+    </script>
+
+</body>
+
+
+</html>

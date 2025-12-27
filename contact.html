@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+
+    <!-- GOOGLE FONTS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* PAGE LOAD */
+        body {
+            opacity: 0;
+            transform: translateY(3vh);
+            transition: all 1.2s ease;
+        }
+
+        /* FLOATING CARDS */
+        @keyframes floatUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .float-card {
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: floatUp .9s ease forwards;
+        }
+
+        .float-card:nth-child(1) {
+            animation-delay: .3s
+        }
+
+        .float-card:nth-child(2) {
+            animation-delay: .6s
+        }
+
+        .float-card:nth-child(3) {
+            animation-delay: .9s
+        }
+
+        .float-card:nth-child(4) {
+            animation-delay: 1.2s
+        }
+
+        /* FORM */
+        input,
+        textarea {
+            transition: all .4s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            transform: scale(1.02);
+        }
+
+        /* MAP */
+        .map-box {
+            opacity: 0;
+            transform: translateX(6vw);
+            animation: slideMap 1s ease forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes slideMap {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+
+    <style>
+        @font-face {
+            font-family: 'Safira';
+            src: url('./fonts/Safira-Regular.woff2') format('woff2'),
+                url('./fonts/Safira-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .menu-item {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease;
+        }
+
+        .menu-item.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-item a {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            color: #b87b7b;
+            transform: translateX(5px);
+        }
+
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* PAGE FADE IN */
+        .page-enter {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
+        .page-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.9s ease;
+        }
+
+        /* CARD SLIDE */
+        .card-enter {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .card-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+
+        /* STAGGER ANIMATION */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FLOAT ANIMATION */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden w-full bg-[#f9efef] font-[Poppins]">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="w-7xl mx-auto px-[3vw]">
+
+            <div class="flex items-center justify-between h-[9vh]">
+
+                <!-- LEFT MENU (DESKTOP) -->
+                <ul class="hidden lg:flex gap-[2vw] text-gray-700 font-medium">
+                    <li><a href="#" class="hover:text-pink-500 transition">Home</a></li>
+                    <li><a href="./shop.html" class="hover:text-pink-500 transition">Shop</a></li>
+                    <li><a href="./about.html" class="hover:text-pink-500 transition">About</a></li>
+                    <li><a href="./contact.html"
+                            class="hover:text-black-500 bg-gray-300 py-[2vh] px-[1vw] transition">Contact</a></li>
+                </ul>
+
+                <!-- LOGO -->
+                <h1 class="text-[6vw] sm:text-[4vw] lg:text-[2vw] hover:cursor-pointer font-semibold tracking-wide"
+                    style="font-family: 'Playfair Display', serif;">
+                    GLOWRA
+                </h1>
+
+                <!-- RIGHT ICONS -->
+                <div class="flex items-center gap-[2vw]">
+
+                    <!-- SEARCH (HIDE ON SMALL) -->
+                    <div class="hidden md:block relative">
+                        <input type="text" placeholder="Search" class="pl-[1vw] pr-[3vw] py-[0.8vh]
+                   rounded-full bg-gray-100 text-sm
+                   focus:outline-none focus:ring-1 focus:ring-pink-400">
+                        <span class="absolute right-[1vw] top-1/2 -translate-y-1/2">🔍</span>
+                    </div>
+
+                    <!-- ACCOUNT -->
+                    <span onclick="window.location.href='login.html'"
+                        class="cursor-pointer text-[5vw] sm:text-xl">👤</span>
+
+                    <!-- CART -->
+                    <a href="cart.html" class="relative cursor-pointer text-[5vw] sm:text-xl">
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs
+                           w-5 h-5 flex items-center justify-center rounded-full">
+                            0
+                        </span>
+                        🛒
+                    </a>
+
+                    <!-- HAMBURGER (MOBILE) -->
+                    <button onclick="toggleMenu()" class="lg:hidden text-[6vw] sm:text-[4vw]
+                      transition-all duration-300
+                       hover:scale-110 active:scale-95">
+                        ☰
+                    </button>
+
+                    <!-- BACKDROP -->
+                    <div id="menuBackdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40
+                     opacity-0 pointer-events-none
+                       transition-opacity duration-500">
+                    </div>
+
+                    <!-- MOBILE MENU -->
+                    <div id="mobileMenu" class="fixed top-0 right-0 h-[100vh] w-[70vw] sm:w-[45vw]
+                       bg-white z-50 shadow-2xl rounded-l-[4vw]
+                         translate-x-full scale-95 opacity-0
+                       transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+
+                        <!-- CLOSE -->
+                        <div class="flex justify-end p-[4vw]">
+                            <button onclick="toggleMenu()" class="text-[6vw] sm:text-[4vw]
+                           hover:rotate-90 transition duration-300">
+                                ✕
+                            </button>
+                        </div>
+
+                        <!-- MENU -->
+                        <ul id="menuItems" class="flex flex-col gap-[4vh] text-center mt-[8vh]
+                            text-[5vw] sm:text-[3vw]
+                           font-medium text-[#6d3f3f]">
+
+                            <li class="menu-item"><a href="index.html">Home</a></li>
+                            <li class="menu-item"><a href="shop.html">Shop</a></li>
+                            <li class="menu-item"><a href="#about">About</a></li>
+                            <li class="menu-item"><a href="cart.html">Orders</a></li>
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-t px-[6vw] py-[3vh] space-y-[2vh]">
+
+            <a href="#home" class="block">Home</a>
+            <a href="#shop" class="block">Shop</a>
+            <a href="#about" class="block">About</a>
+            <a href="#pages" class="block">Pages</a>
+            <a href="#contact" class="block">Contact</a>
+
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative h-[45vh] bg-[#fff4e8] flex items-center justify-center">
+        <h1 class="text-[9vw] sm:text-[6vw] lg:text-[3.5vw]
+             font-bold text-[#6d3f3f]" style="font-family:'Playfair Display',serif;">
+            Contact <span class="text-[#b87b7b]">Us</span>
+        </h1>
+    </section>
+
+    <!-- CLOUD SHAPE -->
+    <div class="relative -mt-[5vh]">
+        <div class="h-[10vh] bg-[#f9efef] rounded-t-[50%]"></div>
+    </div>
+
+    <!-- CONTACT INFO -->
+    <section class="max-w-[90vw] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[4vw] -mt-[6vh]">
+
+        <div class="float-card bg-white p-[4vw] rounded-[2vw] shadow-xl text-center">
+            <p class="text-[4vw] sm:text-[2vw]">📞</p>
+            <h4 class="mt-[1vh] font-medium text-[#6d3f3f] text-[4vw] sm:text-[1.4vw]">Call Us</h4>
+            <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">+91 98765 43210</p>
+        </div>
+
+        <div class="float-card bg-white p-[4vw] rounded-[2vw] shadow-xl text-center">
+            <p class="text-[4vw] sm:text-[2vw]">✉️</p>
+            <h4 class="mt-[1vh] font-medium text-[#6d3f3f] text-[4vw] sm:text-[1.4vw]">Email</h4>
+            <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">support@glowra.com</p>
+        </div>
+
+        <div class="float-card bg-white p-[4vw] rounded-[2vw] shadow-xl text-center">
+            <p class="text-[4vw] sm:text-[2vw]">📍</p>
+            <h4 class="mt-[1vh] font-medium text-[#6d3f3f] text-[4vw] sm:text-[1.4vw]">Location</h4>
+            <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">New Delhi, India</p>
+        </div>
+
+        <div class="float-card bg-white p-[4vw] rounded-[2vw] shadow-xl text-center">
+            <p class="text-[4vw] sm:text-[2vw]">🌐</p>
+            <h4 class="mt-[1vh] font-medium text-[#6d3f3f] text-[4vw] sm:text-[1.4vw]">Website</h4>
+            <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">www.glowra.com</p>
+        </div>
+
+    </section>
+
+    <!-- FORM + MAP -->
+    <section class="max-w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-[6vw] py-[10vh]">
+
+        <!-- FORM -->
+        <div class="bg-white p-[5vw] rounded-[2vw] shadow-xl">
+            <h3 class="text-[5vw] sm:text-[3vw] lg:text-[2vw]
+               font-semibold text-[#6d3f3f] mb-[2vh]" style="font-family:'Playfair Display',serif;">
+                Send Us a Message
+            </h3>
+
+            <input type="text" placeholder="Name"
+                class="w-full mb-[2vh] px-[2vw] py-[1.5vh] rounded-full bg-[#f9efef] outline-none">
+
+            <input type="email" placeholder="Email"
+                class="w-full mb-[2vh] px-[2vw] py-[1.5vh] rounded-full bg-[#f9efef] outline-none">
+
+            <input type="text" placeholder="Subject"
+                class="w-full mb-[2vh] px-[2vw] py-[1.5vh] rounded-full bg-[#f9efef] outline-none">
+
+            <textarea rows="4" placeholder="Message"
+                class="w-full mb-[3vh] px-[2vw] py-[2vh] rounded-[2vw] bg-[#f9efef] outline-none"></textarea>
+
+            <button class="w-full bg-[#b87b7b] text-white py-[1.5vh] rounded-full
+                   hover:bg-[#a96a6a] transition-all duration-500">
+                Send Message
+            </button>
+        </div>
+
+        <!-- MAP -->
+        <div class="map-box bg-white rounded-[2vw] overflow-hidden shadow-xl">
+            <iframe class="w-full h-[100%] min-h-[40vh]"
+                src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-[#fff4e8] py-[8vh] text-center">
+        <h2 class="text-[6vw] sm:text-[4vw] lg:text-[2.5vw]
+             font-semibold text-[#6d3f3f]" style="font-family:'Playfair Display',serif;">
+            Ready To Glow With Us?
+        </h2>
+        <button onclick="window.location.href='shop.html'" class="mt-[3vh] px-[6vw] py-[1.5vh]
+           bg-[#b87b7b] text-white rounded-full
+           hover:bg-[#a96a6a] transition-all duration-500">
+            Shop Now
+        </button>
+    </section>
+
+
+
+    <!-- FOOTER -->
+    <footer class="bg-purple-600 text-white text-center py-[3vh]">
+        © 2025 GLOWRA Beauty
+    </footer>
+
+    <script>
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const items = document.querySelectorAll(".menu-item");
+
+            if (!isMenuOpen) {
+                // OPEN
+                menu.classList.remove("translate-x-full", "scale-95", "opacity-0");
+                backdrop.classList.remove("opacity-0", "pointer-events-none");
+
+                // Stagger animation
+                items.forEach((item, i) => {
+                    setTimeout(() => item.classList.add("show"), i * 120);
+                });
+
+                isMenuOpen = true;
+            } else {
+                // CLOSE
+                menu.classList.add("translate-x-full", "scale-95", "opacity-0");
+                backdrop.classList.add("opacity-0", "pointer-events-none");
+
+                items.forEach(item => item.classList.remove("show"));
+
+                isMenuOpen = false;
+            }
+        }
+    </script>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("page").classList.add("page-enter-active");
+            document.getElementById("card").classList.add("card-enter-active");
+
+            const items = document.querySelectorAll(".fade-up");
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add("show");
+                }, index * 120);
+            });
+        });
+    </script>
+
+    <!-- PAGE LOAD -->
+    <script>
+        window.addEventListener("load", () => {
+            document.body.style.opacity = "1";
+            document.body.style.transform = "translateY(0)";
+        });
+    </script>
+
+</body>
+
+</html>

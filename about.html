@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Safira';
+            src: url('./fonts/Safira-Regular.woff2') format('woff2'),
+                url('./fonts/Safira-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* PAGE FADE IN */
+        .page-enter {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
+        .page-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.9s ease;
+        }
+
+        /* CARD SLIDE */
+        .card-enter {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .card-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+
+        /* STAGGER ANIMATION */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FLOAT ANIMATION */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .menu-item {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease;
+        }
+
+        .menu-item.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-item a {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            color: #b87b7b;
+            transform: translateX(5px);
+        }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* PAGE LOAD */
+        #page {
+            transition: all 1.2s ease;
+        }
+
+        /* HERO TEXT */
+        @keyframes heroText {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-hero {
+            animation: heroText 1.2s ease forwards;
+            animation-delay: .4s;
+        }
+
+        /* FEATURE CARDS */
+        .feature-card {
+            opacity: 0;
+            transform: translateY(4vh);
+            animation: cardFade .8s ease forwards;
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: .3s
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: .6s
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: .9s
+        }
+
+        @keyframes cardFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* IMAGES */
+        .image-left {
+            opacity: 0;
+            transform: translateX(-6vw);
+            animation: slideLeft 1s ease forwards .6s;
+        }
+
+        .image-right {
+            opacity: 0;
+            transform: translateX(6vw);
+            animation: slideRight 1s ease forwards .8s;
+        }
+
+        @keyframes slideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        /* TEAM */
+        .team-card {
+            opacity: 0;
+            transform: scale(.9);
+            animation: teamPop .8s ease forwards;
+        }
+
+        .team-card:nth-child(1) {
+            animation-delay: .4s
+        }
+
+        .team-card:nth-child(2) {
+            animation-delay: .7s
+        }
+
+        .team-card:nth-child(3) {
+            animation-delay: 1s
+        }
+
+        @keyframes teamPop {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+
+</head>
+
+<body id="page" class="overflow-x-hidden w-full bg-[#f9efef] opacity-0 scale-[0.98]">
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="w-7xl mx-auto px-[3vw]">
+
+            <div class="flex items-center justify-between h-[9vh]">
+
+                <!-- LEFT MENU (DESKTOP) -->
+                <ul class="hidden lg:flex gap-[2vw] text-gray-700 font-medium">
+                    <li><a href="./index.html" class="hover:text-pink-500 transition">Home</a></li>
+                    <li><a href="./shop.html" class="hover:text-pink-500 transition">Shop</a></li>
+                    <li><a href="./about.html"
+                            class="hover:text-black-500 bg-gray-300 py-[2vh] px-[1vw] transition">About</a></li>
+                    <li><a href="./contact.html" class="hover:text-pink-500 transition">Contact</a></li>
+                </ul>
+
+                <!-- LOGO -->
+                <h1 class="text-[6vw] sm:text-[4vw] lg:text-[2vw] hover:cursor-pointer font-semibold tracking-wide"
+                    style="font-family: 'Playfair Display', serif;">
+                    GLOWRA
+                </h1>
+
+                <!-- RIGHT ICONS -->
+                <div class="flex items-center gap-[2vw]">
+
+                    <!-- SEARCH (HIDE ON SMALL) -->
+                    <div class="hidden md:block relative">
+                        <input type="text" placeholder="Search" class="pl-[1vw] pr-[3vw] py-[0.8vh]
+                   rounded-full bg-gray-100 text-sm
+                   focus:outline-none focus:ring-1 focus:ring-pink-400">
+                        <span class="absolute right-[1vw] top-1/2 -translate-y-1/2">🔍</span>
+                    </div>
+
+                    <!-- ACCOUNT -->
+                    <span onclick="window.location.href='login.html'"
+                        class="cursor-pointer text-[5vw] sm:text-xl">👤</span>
+
+                    <!-- CART -->
+                    <a href="cart.html" class="relative cursor-pointer text-[5vw] sm:text-xl">
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs
+                           w-5 h-5 flex items-center justify-center rounded-full">
+                            0
+                        </span>
+                        🛒
+                    </a>
+
+                    <!-- HAMBURGER (MOBILE) -->
+                    <button onclick="toggleMenu()" class="lg:hidden text-[6vw] sm:text-[4vw]
+                      transition-all duration-300
+                       hover:scale-110 active:scale-95">
+                        ☰
+                    </button>
+
+                    <!-- BACKDROP -->
+                    <div id="menuBackdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40
+                     opacity-0 pointer-events-none
+                       transition-opacity duration-500">
+                    </div>
+
+                    <!-- MOBILE MENU -->
+                    <div id="mobileMenu" class="fixed top-0 right-0 h-[100vh] w-[70vw] sm:w-[45vw]
+                       bg-white z-50 shadow-2xl rounded-l-[4vw]
+                         translate-x-full scale-95 opacity-0
+                       transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+
+                        <!-- CLOSE -->
+                        <div class="flex justify-end p-[4vw]">
+                            <button onclick="toggleMenu()" class="text-[6vw] sm:text-[4vw]
+                           hover:rotate-90 transition duration-300">
+                                ✕
+                            </button>
+                        </div>
+
+                        <!-- MENU -->
+                        <ul id="menuItems" class="flex flex-col gap-[4vh] text-center mt-[8vh]
+                            text-[5vw] sm:text-[3vw]
+                           font-medium text-[#6d3f3f]">
+
+                            <li class="menu-item"><a href="index.html">Home</a></li>
+                            <li class="menu-item"><a href="shop.html">Shop</a></li>
+                            <li class="menu-item"><a href="#about">About</a></li>
+                            <li class="menu-item"><a href="cart.html">Orders</a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="card-enter hidden lg:hidden bg-white border-t px-[6vw] py-[3vh] space-y-[2vh]">
+
+            <a href="#home" class="block">Home</a>
+            <a href="#shop" class="block">Shop</a>
+            <a href="#about" class="block">About</a>
+            <a href="#pages" class="block">Pages</a>
+            <a href="#contact" class="block">Contact</a>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="relative h-[45vh] w-full bg-black/40">
+        <img src="./images/brushes.jpg" class="absolute cursor-pointer dur inset-0 w-full h-full object-cover opacity-70">
+
+        <div class="relative h-full flex items-center justify-center">
+            <h1 class="animate-hero translate-y-[5vh] opacity-0
+               text-white font-semibold tracking-wide
+               text-[8vw] sm:text-[6vw] lg:text-[3vw]" style="font-family:'Playfair Display',serif;">
+                About Us
+            </h1>
+        </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="max-w-[90vw] mx-auto py-[10vh]">
+
+        <p class="text-center text-[#b87b7b] font-medium text-[3vw] sm:text-[1.8vw]">
+            INTRODUCTION
+        </p>
+
+        <h2 class="text-center mt-[2vh]
+             text-[6vw] sm:text-[4vw] lg:text-[2.5vw]
+             font-semibold text-[#6d3f3f]" style="font-family:'Playfair Display',serif;">
+            Introduction To Best Beauty Brand
+        </h2>
+
+        <!-- FEATURES -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[5vw] mt-[8vh]">
+
+            <div class="feature-card bg-white p-[4vw] rounded-[2vw] shadow-lg text-center">
+                <h3 class="text-[4vw] sm:text-[2vw] font-medium text-[#6d3f3f]">
+                    Clean Ingredients
+                </h3>
+                <p class="mt-[1vh] text-[3vw] sm:text-[1.3vw] text-gray-500">
+                    Safe, cruelty-free & skin-loving formulations.
+                </p>
+            </div>
+
+            <div class="feature-card bg-white p-[4vw] rounded-[2vw] shadow-lg text-center">
+                <h3 class="text-[4vw] sm:text-[2vw] font-medium text-[#6d3f3f]">
+                    Skin Tested
+                </h3>
+                <p class="mt-[1vh] text-[3vw] sm:text-[1.3vw] text-gray-500">
+                    Dermatologically tested for all skin types.
+                </p>
+            </div>
+
+            <div class="feature-card bg-white p-[4vw] rounded-[2vw] shadow-lg text-center">
+                <h3 class="text-[4vw] sm:text-[2vw] font-medium text-[#6d3f3f]">
+                    Premium Care
+                </h3>
+                <p class="mt-[1vh] text-[3vw] sm:text-[1.3vw] text-gray-500">
+                    Luxury beauty inspired by nature & science.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- IMAGE SECTION -->
+    <section class="max-w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-[5vw] py-[8vh]">
+
+        <img src="./images/organiser.jpg" class="image-left cursor-pointer rounded-[2vw] w-full h-[40vh] object-cover">
+
+        <div class="image-right relative rounded-[2vw] overflow-hidden h-[40vh]">
+            <img src="./images/premium makeup.jpg" class="w-full cursor-pointer h-full object-cover">
+        </div>
+
+    </section>
+
+    <!-- TEAM -->
+    <section class="max-w-[90vw] mx-auto py-[10vh]">
+
+        <p class="text-center text-[#b87b7b] text-[3vw] sm:text-[1.6vw]">
+            OUR TEAM
+        </p>
+
+        <h2 class="text-center mt-[2vh]
+             text-[6vw] sm:text-[4vw] lg:text-[2.5vw]
+             font-semibold text-[#6d3f3f]" style="font-family:'Playfair Display',serif;">
+            Meet Our Experts
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[5vw] mt-[8vh]">
+
+            <div class="team-card bg-white p-[4vw] rounded-[2vw] shadow-lg text-center">
+                <img src="./images/first clint.webp" class="w-[20vw] cursor-pointer h-[20vw] mx-auto rounded-full object-cover">
+                <h4 class="mt-[2vh] text-[4vw] sm:text-[1.8vw] font-medium">
+                    Sophia Lee
+                </h4>
+                <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">
+                    Skincare Expert
+                </p>
+            </div>
+
+            <div class="team-card bg-white p-[4vw] rounded-[2vw] shadow-lg text-center">
+                <img src="./images/emma brown.webp" class="w-[20vw] cursor-pointer h-[20vw] mx-auto rounded-full object-cover">
+                <h4 class="mt-[2vh] text-[4vw] sm:text-[1.8vw] font-medium">
+                    Emma Brown
+                </h4>
+                <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">
+                    Makeup Artist
+                </p>
+            </div>
+
+            <div class="team-card bg-white p-[4vw] rounded-[2vw] shadow-lg text-center">
+                <img src="./images/Olivia_Smith.jpg" class="w-[20vw] cursor-pointer h-[20vw] mx-auto rounded-full object-cover">
+                <h4 class="mt-[2vh] text-[4vw] sm:text-[1.8vw] font-medium">
+                    Olivia Smith
+                </h4>
+                <p class="text-gray-500 text-[3vw] sm:text-[1.2vw]">
+                    Product Specialist
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer class="bg-purple-600 text-white text-center py-[3vh]">
+        © 2025 GLOWRA Beauty
+    </footer>
+
+    <!-- PAGE LOAD SCRIPT -->
+    <script>
+        window.addEventListener("load", () => {
+            const page = document.getElementById("page");
+            page.classList.remove("opacity-0", "scale-[0.98]");
+            page.classList.add("opacity-100", "scale-100");
+        });
+    </script>
+
+
+</body>
+
+</html>
